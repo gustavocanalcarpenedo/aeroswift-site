@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AeroSwift | Entregas Autonomas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="AeroSwift inicio">
+        <span class="brand-mark">A</span>
+        <span>AeroSwift</span>
+      </a>
+      <nav class="nav" aria-label="Navegacao principal">
+        <a href="#pedido">Pedido</a>
+        <a href="#rastreamento">Rastreamento</a>
+        <a href="gps-server/dashboard.html">GPS real</a>
+        <a href="#tecnologia">Tecnologia</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="nav-cta" href="#pedido">Pedir entrega</a>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <img src="aeroswift-drone.jpeg" alt="" />
+          <div class="flight-ring"></div>
+          <div class="scan-line"></div>
+        </div>
+
+        <div class="hero-content">
+          <p class="eyebrow">Entregas autonomas. Futuro em movimento.</p>
+          <h1>AeroSwift</h1>
+          <p class="hero-copy">
+            Um drone inteligente para receber pedidos, calcular a melhor rota e
+            acompanhar cada etapa da entrega em tempo real.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-btn" href="#pedido">Iniciar pedido</a>
+            <a class="secondary-btn" href="#rastreamento">Acompanhar entrega</a>
+            <a class="secondary-btn" href="http://localhost:8080">Painel GPS</a>
+          </div>
+
+          <div class="stats" aria-label="Indicadores do servico">
+            <div>
+              <strong>18 min</strong>
+              <span>tempo medio</span>
+            </div>
+            <div>
+              <strong>4.2 km</strong>
+              <span>alcance urbano</span>
+            </div>
+            <div>
+              <strong>24/7</strong>
+              <span>monitoramento</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Pedido e rastreamento">
+        <form class="order-panel" id="pedido">
+          <div class="section-heading">
+          <p class="eyebrow">Pedido rapido</p>
+            <h2>Solicite uma entrega</h2>
+          </div>
+
+          <label>
+            Nome
+            <input id="customerName" type="text" placeholder="Seu nome" required />
+          </label>
+
+          <label>
+            Produto
+            <select id="packageType" required>
+              <option value="Medicamento">Medicamento</option>
+              <option value="Documento">Documento</option>
+              <option value="Eletronico pequeno">Eletronico pequeno</option>
+              <option value="Alimento embalado">Alimento embalado</option>
+            </select>
+          </label>
+
+          <div class="form-grid">
+            <label>
+              Origem
+              <input id="origin" type="text" placeholder="Base AeroSwift" required />
+            </label>
+            <label>
+              Destino
+              <input id="destination" type="text" placeholder="Endereco de entrega" required />
+            </label>
+          </div>
+
+          <label>
+            Prioridade
+            <input id="priority" type="range" min="1" max="3" value="2" />
+            <span class="range-label" id="priorityLabel">Entrega expressa</span>
+          </label>
+
+          <button class="primary-btn full" type="submit">Confirmar pedido</button>
+        </form>
+
+        <section class="tracking-panel" id="rastreamento">
+          <div class="tracking-header">
+            <div>
+              <p class="eyebrow">Rastreamento ao vivo</p>
+              <h2 id="trackingTitle">AS-2047 em rota</h2>
+            </div>
+            <span class="status-pill" id="statusPill">Online</span>
+          </div>
+
+          <div class="map-card google-map" aria-label="Mapa do Google com a entrega">
+            <iframe
+              id="googleMap"
+              title="Mapa do Google - rastreamento AeroSwift"
+              src="https://www.google.com/maps?q=Sao%20Paulo%2C%20SP&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div class="map-note">
+              <span>Google Maps</span>
+              <strong id="mapRouteLabel">Rota aguardando destino</strong>
+            </div>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-top">
+              <span>Progresso da entrega</span>
+              <strong id="progressText">64%</strong>
+            </div>
+            <div class="progress-bar">
+              <span id="progressBar"></span>
+            </div>
+          </div>
+
+          <div class="unlock-card">
+            <span>Codigo do cofre</span>
+            <strong id="unlockCode">----</strong>
+            <p id="unlockMessage">Confirme todos os dados de entrega para receber a senha do cofre.</p>
+          </div>
+
+          <div class="delivery-details">
+            <div>
+              <span>Pedido</span>
+              <strong id="orderCode">AS-8291</strong>
+            </div>
+            <div>
+              <span>Chegada</span>
+              <strong id="eta">12 min</strong>
+            </div>
+            <div>
+              <span>Carga</span>
+              <strong id="cargo">Documento</strong>
+            </div>
+            <div>
+              <span>Senha</span>
+              <strong id="lockerPassword">Aguardando</strong>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="features" id="tecnologia">
+        <div class="section-heading">
+          <p class="eyebrow">Tecnologia AeroSwift</p>
+          <h2>Projetado para entregas urbanas precisas</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <span>01</span>
+            <h3>Rota autonoma</h3>
+            <p>
+              O sistema calcula trajeto, distancia, prioridade e janela de
+              entrega antes de liberar o voo.
+            </p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Compartimento seguro</h3>
+            <p>
+              A carga viaja em um modulo travado, com confirmacao digital para
+              retirada no destino.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Acompanhamento claro</h3>
+            <p>
+              O cliente visualiza status, codigo do pedido, previsao de chegada
+              e progresso do drone.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-band" id="contato">
+        <div>
+          <p class="eyebrow">Projeto AeroSwift</p>
+          <h2>Entrega autonoma para cidades mais ageis.</h2>
+        </div>
+        <a class="primary-btn" href="mailto:contato@aeroswift.com">Falar com a equipe</a>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

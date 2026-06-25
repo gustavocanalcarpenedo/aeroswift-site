@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AeroSwift GPS Live</title>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <div>
+          <p class="eyebrow">AeroSwift GPS Live</p>
+          <h1>Localizacao em tempo real</h1>
+        </div>
+        <span class="status" id="status">Conectando</span>
+      </header>
+
+      <section class="grid">
+        <section class="panel map-panel">
+          <canvas id="trailCanvas" width="900" height="520" aria-label="Trilha do GPS"></canvas>
+          <div class="map-overlay">
+            <span>Trilha local do drone</span>
+            <strong id="lastPoint">Aguardando sinal GPS</strong>
+          </div>
+        </section>
+
+        <aside class="panel data-panel">
+          <div class="metric">
+            <span>Latitude</span>
+            <strong id="lat">--</strong>
+          </div>
+          <div class="metric">
+            <span>Longitude</span>
+            <strong id="lng">--</strong>
+          </div>
+          <div class="metric">
+            <span>Velocidade</span>
+            <strong id="speed">--</strong>
+          </div>
+          <div class="metric">
+            <span>Satelites</span>
+            <strong id="satellites">--</strong>
+          </div>
+          <div class="metric">
+            <span>Ultima atualizacao</span>
+            <strong id="updatedAt">--</strong>
+          </div>
+          <a class="map-link" id="mapLink" href="#" target="_blank" rel="noreferrer">Abrir no mapa</a>
+        </aside>
+      </section>
+
+      <section class="panel instructions">
+        <h2>Como enviar dados</h2>
+        <p>
+          Envie um POST para <code>/api/location</code> com JSON:
+          <code>{"lat":-23.5505,"lng":-46.6333,"speed":12,"satellites":7}</code>
+        </p>
+      </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
